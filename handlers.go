@@ -21,7 +21,7 @@ func formHandler(w http.ResponseWriter, r *http.Request) {
 			newPeople = append(newPeople, Person{v, surnames[i]})
 		}
 		// overwrite stored people
-		people = newPeople
+		DB.SetAll(newPeople)
 	}
 
 	t, err := template.ParseFiles("tmpl/markup.html")
@@ -30,5 +30,6 @@ func formHandler(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintln(w, "Error getting the requested page")
 	}
 
+	people := DB.GetAll()
 	t.Execute(w, people)
 }

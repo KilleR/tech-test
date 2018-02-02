@@ -2,10 +2,11 @@ package main
 
 import "net/http"
 
-var people []Person
+var DB *PeopleDb
 
 func init() {
-	people = []Person{
+	DB = new(PeopleDb)
+	DB.people = []Person{
 		Person{"Jeff", "Stelling"},
 		Person{"Chris", "Kamara"},
 		Person{"Alex", "Hammond"},
