@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tech test form</title>
+</head>
+<body>
+<form>
+    <table>
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+        </tr>
+        {{range .}}
+        <tr>
+            <td><input type="text" name="people[][firstname]" value="{{.Firstname}}" /></td>
+            <td><input type="text" name="people[][surname]" value="{{.Surname}}" /></td>
+        </tr>
+        {{end}}
+    </table>
+    <input type="submit" value="OK" />
+</form>
+
+</body>
+</html>

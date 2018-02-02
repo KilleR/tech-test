@@ -3,14 +3,12 @@ package main
 import (
 	"net/http"
 	"fmt"
+	"html/template"
+	"log"
 )
 
 func formHandler(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
-
-	fmt.Println("Form:",r.Form)
-	fmt.Println("People:", r.Form["people[][firstname]"])
-	fmt.Println("PostForm:", r.PostForm)
 
 	firstnames := r.Form["people[][firstname]"]
 	surnames := r.Form["people[][surname]"]
@@ -19,6 +17,15 @@ func formHandler(w http.ResponseWriter, r *http.Request) {
 		fmt.Printf("Person %d: %s %s\r\n", i, v, surnames[i])
 	}
 
+	t, err := template.ParseFiles("tmpl/markup.html")
+	if err != nil {
+		log.Println("Error parsing markup template:",err)
+		fmt.Fprintln(w, "Error getting the requested page")
+	}
 
-	http.ServeFile(w, r, "markup.html")
+	people := []Person{
+		Person{"Jeff", "Stelling"},
+	}
+
+	t.Execute(w, people)
 }
