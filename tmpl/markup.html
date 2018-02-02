@@ -13,8 +13,8 @@
         </tr>
         {{range .}}
         <tr>
-            <td><input type="text" name="people[][firstname]" value="{{.Firstname}}" /></td>
-            <td><input type="text" name="people[][surname]" value="{{.Surname}}" /></td>
+            <td><input title="First Name" type="text" name="people[][firstname]" value="{{.Firstname}}" /></td>
+            <td><input title="Surname" type="text" name="people[][surname]" value="{{.Surname}}" /></td>
         </tr>
         {{end}}
     </table>
